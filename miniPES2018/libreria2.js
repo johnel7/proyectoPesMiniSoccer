@@ -32,7 +32,7 @@
               ctx = canvas.getContext("2d");
               ship.src = 'pelota12.png';
               back.src = 'estadio.png';
-              //BolaDeBillar();
+              IniciarTiempo();
           }
           // Play the game until the until the game is over.
           gameLoop = setInterval(doGameLoop, 16);
@@ -47,6 +47,33 @@
           ctx1.clearRect(10, 10, 180, 40);
           ctx1.fillText(acumulador, 86, 35);
           acumulador++;
+      }
+      /*====== Funcion del cronometro=========*/
+      function IniciarTiempo() {
+          segundos = 0;
+          s = document.getElementById("segundos");
+          m = document.getElementById("minutos");
+          cronometro = setInterval(function() {
+              segundos++;
+              secs = segundos;
+              mins = 0;
+              while (secs >= 60) {
+                  mins++;
+                  secs -= 60;
+              }
+              if (mins < 10) {
+                  m.innerHTML = "0" + mins;
+              } else {
+                  m.innerHTML = mins;
+              }
+              if (secs < 10) {
+                  s.innerHTML = "0" + secs;
+              } else {
+                  s.innerHTML = secs;
+              }
+              total_secs = secs;
+              total_mins = mins;
+          }, 1000);
       }
 
       function stars() {
