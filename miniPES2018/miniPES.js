@@ -29,34 +29,27 @@
       var gol2 = 0;
       var goool = false;
 
-      function canvasJugarFutbol() {
-          contador();
-          canvas = document.getElementById("myCanvas");
-          ranX = Math.floor(Math.random() * 700);
-          ranY = Math.floor(Math.random() * 400);
-          if (ranX >= 60 && ranY >= 60 && ranX <= 760 && ranY <= 400) {
-              x = ranX;
-              y = ranY;
-          } else {
-              x = 250;
-              y = 250;
-          }
-          shipX = x;
-          shipY = y;
-          if (canvas.getContext) {
-              ctx = canvas.getContext("2d");
-              balon.src = 'pelota12.png';
-              cancha.src = 'estadio.png';
-              IniciarTiempo();
-          }
-          // Juega el juego, hasta que el juego termine.
-          gameLoop = setInterval(doGameLoop, 16);
-          window.addEventListener('keydown', MovimientosDeLaPelota, true);
+      function miniPES() {
+          canvas = document.getElementById('myCanvas');
+          ctx = canvas.getContext('2d');
+          coordenadasPelota();
+          EjeCoordenadaJugadores();
+          setInterval(function() {
+              contador(0, 0)
+          }, 1);
+          run();
+          doblePintado();
+          IniciarTiempo();
       }
 
-      function doGameLoop() {
-          ctx.drawImage(cancha, 0, 0);
-          ctx.drawImage(balon, shipX, shipY, 40, 40);
+      function run() {
+          setTimeout(run, 50);
+          MovimientosDeLaPelota();
+      }
+
+      function doblePintado() {
+          requestAnimationFrame(doblePintado);
+          pintado(ctx);
       }
 
       function contador() {
