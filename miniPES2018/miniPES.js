@@ -131,88 +131,135 @@
           arqBarcelona.src = "marco.png";
           ctx.drawImage(arqBarcelona, 780, EjeY[11], 35, 60);
       }
-
-      function MovimientosDeLaPelota(evt) {
-          // bandera para devolver las variables si llegamos a un borde del tablero.
-          var flag = 0; //bandera
-          oldShipX = shipX;
-          oldShipY = shipY;
-          oldBack = cancha;
-          switch (evt.keyCode) {
-              // Flecha Izquierda cuando se presiona la tecla <-
-              case 37:
-                  shipX = shipX - 10;
-                  if (shipX < 55) {
-                      shipX = 55;
-                      flag = 1;
-                  }
-                  break;
-                  // Flecha Derecha. cuando se presiona la tecla ->
-              case 39:
-                  shipX = shipX + 10;
-                  if (shipX > 745) {
-                      shipX = 745;
-                      flag = 1;
-                  }
-                  break;
-                  // Flecha Abajo: cuando se presiona la tecla abajo
-              case 40:
-                  shipY = shipY + 10;
-                  if (shipY > 380) {
-                      shipY = 380;
-                      flag = 1;
-                  }
-                  break;
-                  // Flecha Arriba:cuando se presiona la tecla arriba
-              case 38:
-                  shipY = shipY - 10;
-                  if (shipY < 55) {
-                      shipY = 55;
-                      flag = 1;
-                  }
-                  break;
-          }
-          var aleX = Math.floor(Math.random() * 700);
-          var aleY = Math.floor(Math.random() * 400);
-          if (aleX >= 80 && aleY >= 80 && aleX <= 650 && aleY <= 300) {
-              x = aleX;
-              y = aleY;
-          } else {
+      /*============================== Funcion aleatoria de la pelota en campo de juego=========================*/
+      function coordenadasPelota() {
+          var randonX = Math.floor(Math.random() * 700);
+          var randonY = Math.floor(Math.random() * 400);
+          if (randonX >= 60 && randonY >= 60 && randonX <= 700 && randonY <= 400) { //dimesiones del area de la cancha en dond la pelota puede aparecer
+              x = randonX;
+              y = randonY;
+          } else { //en caso sobrepase ese area, se le agrega estos valores a las coordenadas
               x = 250;
               y = 250;
           }
-          /*  
-                    //izquirda superior
-                    if (shipX == 55 && shipY == 55) {
-                        contador();
-                        shipX = x;
-                        shipY = y;
-                    }
-                    //derecha superior
-                    else if (shipX == 745 && shipY == 55) {
-                        contador();
-                        shipX = x;
-                        shipY = y;
-                    }
-                    //derecha inferior
-                    else if (shipX == 745 && shipY == 380) {
-                        contador();
-                        shipX = x;
-                        shipY = y;
-                    }
-                    //isquierda inferior
-                    else if (shipX == 55 && shipY == 380) {
-                        contador();
-                        shipX = x;
-                        shipY = y;
-                    }
-                    //centro superior
-                    else if (shipX >= 395 && shipX <= 410) {
-                        if (shipY == 55 || shipY == 380) {
-                            contador();
-                            shipX = x;
-                            shipY = y;
-                        }
-                    }
-                    */
       }
+      /*============================== Funcion aleatoria de jugadores en campo de juego==========================*/
+      function EjeCoordenadaJugadores() {
+          var dif = 0;
+          for (var i = 0; i <= 12; i++) {
+              var randonX = Math.floor(Math.random() * 700);
+              var randonY = Math.floor(Math.random() * 400);
+              if (i >= 11) {
+                  if (randonY > 150 && randonY < 280) {
+                      EjeY[i] = randonY;
+                  } else {
+                      EjeY[i] = 230;
+                      EjeY[i + 1] = 230;
+                  }
+              } else {
+                  if (randonX >= 60 && randonY >= 60 && randonX <= 700 && randonY <= 400) { //dimesiones del area de la cancha en dond la pelota puede aparecer
+                      EjeX[i] = randonX;
+                      EjeY[i] = randonY;
+                  } else { //en caso sobrepase ese area, se le agrega estos valores a las coordenadas
+                      EjeX[i] = 150 + dif;
+                      EjeY[i] = 150 + dif;
+                      dif += 50;
+                      if (dif >= 300) {
+                          dif = 0;
+                      }
+                  }
+              }
+          }
+      }
+      /*============================== Funcion del teclado======================================*/
+      /*============================== Movemos con las flechas del teclado======================*/
+      function MovimientosDeLaPelota() {
+          var final = 12;
+          //fecha arriba
+          if (pressing[KEY_UP]) y -= 5;
+          for (var i = 0; i <= final; i++) {
+              if (i <= 4) {
+                  if (x > (EjeX[i] - 20) && x < (EjeX[i] + 30) && y > (EjeY[i] - 25) && y < (EjeY[i] + 50)) {
+                      y = EjeY[i] - 25;
+                  }
+              } else {
+                  if (x > (EjeX[i] - 20) && x < (EjeX[i] + 30) && y > (EjeY[i] - 25) && y < (EjeY[i] + 50)) {
+                      y = EjeY[i] + 50;
+                  }
+              }
+          }
+          //flecha derecha
+          if (pressing[KEY_RIGHT]) x += 5;
+          for (var i = 0; i <= final; i++) {
+              if (i <= 4) {
+                  if (x > (EjeX[i] - 20) && x < (EjeX[i] + 30) && y > (EjeY[i] - 25) && y < (EjeY[i] + 50)) {
+                      x = EjeX[i] + 30;
+                  }
+              } else {
+                  if (x > (EjeX[i] - 20) && x < (EjeX[i] + 30) && y > (EjeY[i] - 25) && y < (EjeY[i] + 50)) {
+                      x = EjeX[i] - 20;
+                  }
+              }
+          }
+          //flecha abajo
+          if (pressing[KEY_DOWN]) y += 5;
+          for (var i = 0; i <= final; i++) {
+              if (i <= 4) {
+                  if (x > (EjeX[i] - 20) && x < (EjeX[i] + 30) && y > (EjeY[i] - 25) && y < (EjeY[i] + 50)) {
+                      y = EjeY[i] + 50;
+                  }
+              } else {
+                  if (x > (EjeX[i] - 20) && x < (EjeX[i] + 30) && y > (EjeY[i] - 25) && y < (EjeY[i] + 50)) {
+                      y = EjeY[i] - 25;
+                  }
+              }
+          }
+          //flecha izquierda
+          if (pressing[KEY_LEFT]) x -= 5;
+          for (var i = 0; i <= final; i++) {
+              if (i <= 4) {
+                  if (x > (EjeX[i] - 20) && x < (EjeX[i] + 30) && y > (EjeY[i] - 25) && y < (EjeY[i] + 50)) {
+                      x = EjeX[i] - 20;
+                  }
+              } else {
+                  if (x > (EjeX[i] - 20) && x < (EjeX[i] + 30) && y > (EjeY[i] - 25) && y < (EjeY[i] + 50)) {
+                      x = EjeX[i] + 30;
+                  }
+              }
+          }
+          //limites del estadio
+          if (x > 796)
+              //arco del barcelona
+              if (y > 175 && y < 305) {
+                  contador(1, 0);
+                  coordenadasPelota();
+                  EjeCoordenadaJugadores();
+              }
+          else {
+              x = 796;
+          }
+          if (y > 448) y = 448;
+          if (x < 24)
+              //arco del real madrid
+              if (y > 175 && y < 305) {
+                  contador(0, 1);
+                  coordenadasPelota();
+                  EjeCoordenadaJugadores();
+              }
+          else {
+              x = 24;
+          }
+          if (y < 24) y = 24;
+      }
+      document.addEventListener('keydown', function(evt) {
+          lastPress = evt.keyCode;
+          pressing[evt.keyCode] = true;
+      }, false);
+      document.addEventListener('keyup', function(evt) {
+          pressing[evt.keyCode] = false;
+      }, false);
+      window.requestAnimationFrame = (function() {
+          return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function(callback) {
+              window.setTimeout(callback, 17);
+          };
+      })();
