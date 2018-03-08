@@ -1,18 +1,33 @@
-      // Global variables
-      var canvas; // canvas
-      var ctx; // contexto
-      var cancha = new Image();
-      var oldBack = new Image();
-      var balon = new Image();
-      var shipX = 0; //posición  X
-      var shipY = 0; // posición  Y
-      var oldShipX = 0; // posicion antigua X
-      var oldShipY = 0; // posicion antigua Y
+      // Variables Globales
+      //insertando imagenes 
+      var estadioFutbol = new Image();
+      var pelota = new Image();
+      var jugReal = new Image();
+      var jugBarcelona = new Image();
+      var arqReal = new Image();
+      var arqBarcelona = new Image();
+      var logoReal = new Image();
+      var logoBarcelona = new Image();
+      var arbitro = new Image();
+      //valor de las teclado
+      var KEY_ENTER = 13;
+      var KEY_LEFT = 37;
+      var KEY_UP = 38;
+      var KEY_RIGHT = 39;
+      var KEY_DOWN = 40;
+      //otros funcionalidades del teclado
+      var lastPress = null;
+      var pressing = [];
+      var canvas = null;
+      var ctx = null;
+      //coordenandas de la pelota y los jugadores
       var x = 0;
       var y = 0;
-      var acumulador = 0;
-      var ranX = 0;
-      var ranY = 0;
+      var EjeX = [];
+      var EjeY = [];
+      var gol1 = 0;
+      var gol2 = 0;
+      var goool = false;
 
       function canvasJugarFutbol() {
           contador();
