@@ -52,14 +52,19 @@
           pintado(ctx);
       }
 
-      function contador() {
+      function contador(local, visitante) {
           var c = document.getElementById("myCanvas2");
           var ctx1 = c.getContext("2d");
+          logoReal.src = 'realmadrid.png';
+          logoBarcelona.src = 'barcelona.png';
+          ctx1.drawImage(logoReal, 8, 0, 35, 35);
+          ctx1.drawImage(logoBarcelona, 210, 0, 35, 35);
           ctx1.fillStyle = "white";
-          ctx1.font = "30px Arial";
-          ctx1.clearRect(10, 10, 180, 40);
-          ctx1.fillText(acumulador, 86, 35);
-          acumulador++;
+          ctx1.font = "28px Arial";
+          gol1 += local;
+          gol2 += visitante;
+          ctx1.clearRect(80, 2, 100, 50);
+          ctx1.fillText(gol1 + '  :  ' + gol2, 80, 30);
       }
       /*====== Funcion del cronometro=========*/
       function IniciarTiempo() {
