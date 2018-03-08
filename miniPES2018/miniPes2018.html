@@ -2,15 +2,27 @@
 <html lang="es">
   <head>
      <meta charset="UTF-8">
-     <script type="text/javascript" src="libreria2.js"> </script>
+     <title>Mini PES 2018</title>
+     <script type="text/javascript" src="miniPES.js"> </script>
       <link rel="stylesheet" href="estilo.css">
   </head>
   
-  <body onload="canvasJugarFutbol()" style="background:url(fondo.jpg);">
-  	  <center><img src="puntuacion2.png" class="imagen"></center>
-  	  <center><canvas id="myCanvas2" width="200" height="40" style="border:3px solid #000010; background: #000010;"></canvas></center>
-      <center><canvas id="myCanvas" width="840" height="500" style="border:3px solid #000000;"></canvas></center>
-
+  <body onload="miniPES()" class="body">
+  	
+    <div>
+       <center>
+        <canvas id="myCanvas2" width="250" height="35" class="canvas2">
+        </canvas>
+      </center>
+    </div>
+  	 
+     <div class="divcanvas">
+        <center>
+        <canvas id="myCanvas" width="850" height="500">
+        </canvas>
+      </center>
+     </div>
+     
        <div class="texto">
  	     <span id="minutos">00</span>:<span id="segundos">00</span>
        </div>

@@ -1,16 +1,35 @@
+.body {
+    background: url(plano.png);
+}
 .imagen {
     display: block;
-    width: 20%;
-    height: auto;
+    width: 100%;
+    height: 10%;
+    margin: auto;
 }
 .texto {
-    white-space: nowrap;
     color: white;
+    background: #0a0f44;
+    border-radius: 1.5rem;
     font-size: 20px;
+    text-align: center;
     position: absolute;
     overflow: hidden;
-    top: 4%;
-    left: 57%;
+    top: 9%;
+    left: 50%;
+    width: 100px;
+    height: 20px;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
+}
+.canvas2 {
+    border: 3px solid #102030;
+    border-radius: 1.5rem;
+    background: #102030;
+}
+.divcanvas {
+    margin-top: 83px;
+    margin-bottom: 100px;
+    margin-right: 80px;
+    margin-left: 115px;
 }
