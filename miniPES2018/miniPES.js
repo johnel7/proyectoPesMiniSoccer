@@ -66,6 +66,14 @@
           ctx1.clearRect(80, 2, 100, 50);
           ctx1.fillText(gol1 + '  :  ' + gol2, 80, 30);
       }
+      /*============================== Funcion mostrar pelota y estadio en pantalla========================*/
+      function pintado(ctx) {
+          pelota.src = 'pelota.png'; //agrega la pelota
+          estadioFutbol.src = 'estadio2.jpg'; //agregar la cancha de futbol
+          ctx.drawImage(estadioFutbol, 0, 0, canvas.width, canvas.height); //*/
+          ctx.drawImage(pelota, x, y, 25, 25);
+          jugadorFutbol(ctx);
+      }
       /*====== Funcion del cronometro=========*/
       function IniciarTiempo() {
           segundos = 0;
@@ -92,6 +100,36 @@
               total_secs = secs;
               total_mins = mins;
           }, 1000);
+      }
+      /*============================== Funcion insertar jugadores al estadio======================================*/
+      /*============================== como tambien ponemos los nombres a los jugadores =========================*/
+      function jugadorFutbol(evt) {
+          var nombreR = new Array("Kroos");
+          var nombreB = new Array("Messi");
+          for (var i = 0; i <= 9; i++) {
+              if (i <= 4) {
+                  jugReal.src = 'iniesta.png';
+                  ctx.fillStyle = 'white';
+                  ctx.font = "15px Arial";
+                  ctx.fillText(nombreR, EjeX[i], EjeY[i]);
+                  ctx.drawImage(jugReal, EjeX[i], EjeY[i], 40, 60);
+              } else {
+                  jugBarcelona.src = "messi.png";
+                  ctx.fillStyle = 'white';
+                  ctx.font = "15px Arial";
+                  ctx.fillText(nombreB, EjeX[i], EjeY[i]);
+                  ctx.drawImage(jugBarcelona, EjeX[i], EjeY[i], 40, 60);
+              }
+          }
+          //______________ Insertamos el arbitro al campo de juego _____________________________________
+          arbitro.src = "arbitro2.png";
+          ctx.drawImage(arbitro, EjeX[10], EjeY[10], 40, 80);
+          arqReal.src = "jasper.png";
+          ctx.drawImage(arqReal, 30, EjeY[12], 35, 60);
+          EjeX[11] = 780;
+          EjeX[12] = 30;
+          arqBarcelona.src = "marco.png";
+          ctx.drawImage(arqBarcelona, 780, EjeY[11], 35, 60);
       }
 
       function MovimientosDeLaPelota(evt) {
